@@ -1,1 +1,15 @@
-<p>book-list works!</p>
+
+
+<h2>Book List</h2>
+
+<p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+<div *ngIf="!errorMessage && books.length === 0" class="empty-message">
+  No books available yet.
+</div>
+
+<div *ngFor="let book of books" class="book-card">
+  <h3>{{ book.title }}</h3>
+  <p><strong>Author:</strong> {{ book.author }}</p>
+  <p><strong>Description:</strong> {{ book.description }}</p>
+</div>
