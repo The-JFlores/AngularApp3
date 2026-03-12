@@ -9,7 +9,6 @@ import { Book } from '../models/book';
   providedIn: 'root'
 })
 export class BookService {
-
   // Inject HttpClient to communicate with the backend API
   private http = inject(HttpClient);
 

@@ -1,6 +1,7 @@
 
 
 import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BookService } from '../../services/book';
@@ -8,12 +9,11 @@ import { Book } from '../../models/book';
 
 @Component({
   selector: 'app-book-add',
-  imports: [ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './book-add.html',
   styleUrl: './book-add.css'
 })
 export class BookAdd {
-
   // Inject the required Angular services
   private formBuilder = inject(FormBuilder);
   private bookService = inject(BookService);
@@ -42,8 +42,11 @@ export class BookAdd {
       description: this.bookForm.value.description ?? ''
     };
 
+    console.log('Submitting book:', newBook);
+
     this.bookService.addBook(newBook).subscribe({
-      next: () => {
+      next: (response) => {
+        console.log('Book added successfully:', response);
         this.errorMessage = '';
         this.bookForm.reset();
         this.router.navigate(['/list']);
