@@ -17,7 +17,8 @@ export class BookService {
 
   // Retrieve all books from the backend
   getBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.apiUrl}/get_books.php`);
+    const timestamp = new Date().getTime();
+    return this.http.get<Book[]>(`${this.apiUrl}/get_books.php?t=${timestamp}`);
   }
 
   // Send a new book to the backend
@@ -30,8 +31,9 @@ export class BookService {
     return this.http.put(`${this.apiUrl}/update_book.php?id=${id}`, book);
   }
 
-  // Placeholder for deleting a book in the future
-  deleteBook(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/delete_book.php?id=${id}`);
-  }
+  
+  // Delete a book from the backend
+deleteBook(id: number): Observable<any> {
+  return this.http.get(`${this.apiUrl}/delete_book.php?id=${id}`);
+}
 }
