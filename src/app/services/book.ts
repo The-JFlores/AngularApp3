@@ -21,9 +21,9 @@ export class BookService {
     return this.http.get<Book[]>(`${this.apiUrl}/get_books.php?t=${timestamp}`);
   }
 
-  // Send a new book to the backend
-  addBook(book: Book): Observable<any> {
-    return this.http.post(`${this.apiUrl}/add_book.php`, book);
+  // Send a new book with optional file upload
+  addBook(formData: FormData): Observable<any> {
+  return this.http.post(`${this.apiUrl}/add_book.php`, formData);
   }
 
   // Update an existing book using form data
