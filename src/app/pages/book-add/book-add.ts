@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BookService } from '../../services/book';
-import { Book } from '../../models/book';
+
 
 @Component({
   selector: 'app-book-add',
@@ -22,12 +22,24 @@ export class BookAdd {
   // Stores an error message if the request fails
   errorMessage: string = '';
 
+  // Stores the selected file for upload
+  selectedFile: File | null = null;
+
   // Creates the reactive form with validation rules
   bookForm = this.formBuilder.group({
     title: ['', Validators.required],
     author: ['', Validators.required],
     description: ['', Validators.required]
   });
+
+  // Stores the selected file when the user picks one
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+  }
+}
 
   // Handles form submission
   onSubmit(): void {
@@ -36,15 +48,18 @@ export class BookAdd {
       return;
     }
 
-    const newBook: Book = {
-      title: this.bookForm.value.title ?? '',
-      author: this.bookForm.value.author ?? '',
-      description: this.bookForm.value.description ?? ''
-    };
+    const formData = new FormData();
+    formData.append('title', this.bookForm.value.title ?? '');
+    formData.append('author', this.bookForm.value.author ?? '');
+    formData.append('description', this.bookForm.value.description ?? '');
 
-    console.log('Submitting book:', newBook);
+    if (this.selectedFile) {
+    formData.append('cover', this.selectedFile);
+  }
+  console.log('Submitting book form data');
 
-    this.bookService.addBook(newBook).subscribe({
+  this.bookService.addBook(formData).subscribe({
+
       next: (response) => {
         console.log('Book added successfully:', response);
         this.errorMessage = '';
