@@ -26,14 +26,13 @@ export class BookService {
     return this.http.post(`${this.apiUrl}/add_book.php`, book);
   }
 
-  // Placeholder for updating a book in the future
-  updateBook(id: number, book: Book): Observable<any> {
-    return this.http.put(`${this.apiUrl}/update_book.php?id=${id}`, book);
+  // Update an existing book using form data
+  updateBook(formData: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/update_book.php`, formData);
   }
 
-  
   // Delete a book from the backend
-deleteBook(id: number): Observable<any> {
-  return this.http.get(`${this.apiUrl}/delete_book.php?id=${id}`);
-}
+  deleteBook(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/delete_book.php?id=${id}`);
+  }
 }

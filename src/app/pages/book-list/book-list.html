@@ -13,5 +13,16 @@
   <p><strong>Author:</strong> {{ book.author }}</p>
   <p><strong>Description:</strong> {{ book.description }}</p>
 
-  <button *ngIf="book.id" (click)="deleteBook(book.id)">Delete</button>
+<div *ngIf="book.cover_image" class="cover-preview">
+  <p><strong>Cover:</strong></p>
+  <img
+    [src]="'http://localhost/angular-api/uploads/' + book.cover_image"
+    [alt]="book.title + ' cover'"
+  />
+</div>
+
+  <div class="button-group">
+    <button *ngIf="book.id" [routerLink]="['/update', book.id]">Update</button>
+    <button *ngIf="book.id" (click)="deleteBook(book.id)">Delete</button>
+  </div>
 </div>

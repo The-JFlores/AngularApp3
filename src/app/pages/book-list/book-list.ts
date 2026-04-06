@@ -1,11 +1,14 @@
+
+
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { BookService } from '../../services/book';
 import { Book } from '../../models/book';
 
 @Component({
   selector: 'app-book-list',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './book-list.html',
   styleUrl: './book-list.css'
 })
@@ -26,8 +29,6 @@ export class BookList implements OnInit {
 
   // Request the list of books from the backend
   loadBooks(): void {
-    const timestamp = new Date().getTime();
-
     this.bookService.getBooks().subscribe({
       next: (data) => {
         this.books = data;

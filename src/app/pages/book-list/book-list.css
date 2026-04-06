@@ -1,3 +1,5 @@
+
+
 h2 {
   text-align: center;
   margin-bottom: 20px;
@@ -17,8 +19,13 @@ h2 {
   margin-bottom: 10px;
 }
 
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
 .book-card button {
-  margin-top: 10px;
   padding: 8px 14px;
   border: 1px solid #cfcfcf;
   border-radius: 6px;
@@ -39,4 +46,16 @@ h2 {
 .empty-message {
   text-align: center;
   color: #666;
+}
+
+.cover-preview {
+  margin-top: 12px;
+}
+
+.cover-preview img {
+  width: 140px;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 8px;
 }

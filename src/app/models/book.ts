@@ -14,4 +14,7 @@ export interface Book {
 
   // Short description of the book
   description: string;
+
+  // Optional image file name stored in the backend
+  cover_image?: string
 }
